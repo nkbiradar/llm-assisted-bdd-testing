@@ -1,50 +1,65 @@
-# LLM-Assisted BDD Functional Testing
+LLM-Assisted BDD Functional Testing
+📖 Overview
+This project demonstrates a simple and practical approach to functional testing using LLM-assisted Behavior Driven Development (BDD).
 
-## Overview
-This project demonstrates a simple and practical approach to functional testing
-using LLM-assisted BDD. Plain English business requirements are converted into
-Gherkin scenarios, validated, manually approved, and selectively automated.
+The system converts plain English business requirements into Gherkin scenarios. These scenarios are then validated, manually approved by a human tester, and selectively automated.
 
-Only happy-path scenarios are automated to ensure reliability and control.
+Core Philosophy: Only "happy-path" scenarios are automated to ensure reliability, stability, and control.
 
----
+🔄 Project Flow
+The data pipeline moves through the following stages:
 
-## Project Flow
-Business Requirement → BDD Scenario Generation → Validation → Manual Approval →
-BDD Automation → Dashboard Visualization
+Business Requirement (Input)
 
----
+BDD Scenario Generation (LLM)
 
-## Tech Stack
-- Python
-- Behave (BDD)
-- Playwright
-- HTML, CSS, JavaScript
-- JSON for reporting
+Validation
 
----
+Manual Approval (Human-in-the-loop)
 
-## How to Run
+BDD Automation (Execution)
 
-```bash
+Dashboard Visualization (Reporting)
+
+🛠 Tech Stack
+Language: Python
+
+Framework: Behave (BDD)
+
+Automation: Playwright
+
+Frontend (Dashboard): HTML, CSS, JavaScript
+
+Data Exchange: JSON
+
+🚀 How to Run
+1. Prerequisites
+Ensure you have the necessary dependencies installed (assuming a requirements.txt exists):
+
+Bash
+
+pip install -r requirements.txt
+playwright install
+2. Execute the Script
+Run the main entry point:
+
+Bash
+
 python run.py
+3. View Results
+After execution is complete, open the dashboard in your browser:
 
+Plaintext
 
-After execution, open:
 sample_app/dashboard.html
+📋 Scope & Test Coverage
+This project uses a Human-in-the-Loop approach to ensure accuracy.
 
+Admin Login: Represents the Automated Happy Path. This flow is fully generated and executed by the script.
 
-Notes
+User Login: Documented and generated, but not automated. This demonstrates the selective nature of the automation.
 
-Admin login represents the automated happy path
+Approval: Final validation is performed by a human tester before execution triggers.
 
-User login is documented but not automated
-
-Approval is done by a tester (human-in-the-loop)
-
-Author
-
+👤 Author
 Nayan Kumar Biradar
-
-
----
