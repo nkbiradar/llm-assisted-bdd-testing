@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+*.pyc
+reports/execution_data.json
+playwright/.cache/
+.env

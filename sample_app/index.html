@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Secure Login</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background: linear-gradient(135deg, #eef2f7, #cfd9df);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-container {
+      background: #ffffff;
+      width: 380px;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.6s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #2c3e50;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 11px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #4a90e2;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4a90e2;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    button:hover {
+      background: #357abd;
+    }
+
+    #message {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .success {
+      color: #2ecc71;
+    }
+
+    .error {
+      color: #e74c3c;
+    }
+
+    .footer {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <h2>Secure Login</h2>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input id="username" placeholder="Enter username" />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="Enter password" />
+    </div>
+
+    <button onclick="login()">Login</button>
+
+    <p id="message"></p>
+
+    <div class="footer">
+      LLM-Assisted BDD Testing • Demo
+    </div>
+  </div>
+
+<script>
+  const users = {
+    admin: {
+      password: "admin123",
+      role: "ADMIN",
+      redirect: "dashboard.html"
+    },
+    user: {
+      password: "user123",
+      role: "USER",
+      redirect: "user_dashboard.html"
+    }
+  };
+
+  function login() {
+    const u = document.getElementById("username").value.trim();
+    const p = document.getElementById("password").value.trim();
+    const msg = document.getElementById("message");
+
+    if (users[u] && users[u].password === p) {
+      msg.innerText = `Login Successful (${users[u].role})`;
+      msg.className = "success";
+
+      // 🔥 ABSOLUTE FILE PATH REDIRECT (FIX)
+      const basePath = window.location.href.substring(
+        0,
+        window.location.href.lastIndexOf("/") + 1
+      );
+
+      setTimeout(() => {
+        window.location.href = basePath + users[u].redirect;
+      }, 800);
+
+    } else {
+      msg.innerText = "Invalid Credentials";
+      msg.className = "error";
+    }
+  }
+</script>
+
+</body>
+</html>

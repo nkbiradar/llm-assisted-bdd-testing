@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BDD Execution Dashboard</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #4a90e2, #357abd);
+      color: white;
+      padding: 25px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    /* Cards */
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: #2c3e50;
+    }
+
+    /* Status Grid */
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .status-card {
+      background: #f9fafc;
+      border-radius: 8px;
+      padding: 18px;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px #e0e0e0;
+    }
+
+    .status-title {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .pass {
+      background: #e6f7ec;
+      color: #2ecc71;
+    }
+
+    .fail {
+      background: #fdecea;
+      color: #e74c3c;
+    }
+
+    /* Code block */
+    pre {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 13px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    LLM-Assisted BDD Functional Testing Dashboard
+  </div>
+
+  <div class="container">
+
+    <div class="card">
+      <h3>📌 Business Requirement</h3>
+      <p id="requirement">Loading...</p>
+    </div>
+
+    <div class="card">
+      <h3>🧠 Generated Gherkin Scenarios</h3>
+      <pre id="gherkin">Loading...</pre>
+    </div>
+
+    <div class="card">
+  <h3>📜 Execution History</h3>
+
+  <table style="width:100%;border-collapse:collapse;">
+    <thead>
+      <tr style="background:#f1f1f1;">
+        <th style="padding:10px;text-align:left;">#</th>
+        <th style="padding:10px;text-align:left;">Requirement</th>
+        <th style="padding:10px;">Validation</th>
+        <th style="padding:10px;">Execution</th>
+        <th style="padding:10px;">Time</th>
+      </tr>
+    </thead>
+    <tbody id="historyTable"></tbody>
+  </table>
+</div>
+
+    <div class="card">
+      <h3>⏱ Execution Timestamp</h3>
+      <p id="timestamp">Loading...</p>
+    </div>
+
+    <div class="footer">
+      Designed for Enterprise-Grade QA Automation • NTT DATA Case Study
+    </div>
+
+  </div>
+
+ <script>
+  fetch("../reports/execution_data.json")
+    .then(res => res.json())
+    .then(history => {
+
+      // Safety check
+      if (!Array.isArray(history) || history.length === 0) {
+        console.warn("No execution history found");
+        return;
+      }
+
+      // Latest execution (last item)
+      const latest = history[history.length - 1];
+
+      // Populate main sections
+      document.getElementById("requirement").innerText = latest.requirement;
+      document.getElementById("gherkin").innerText = latest.gherkin;
+      document.getElementById("timestamp").innerText = latest.timestamp;
+
+      // Populate history table
+      const rows = history.map((run, index) => `
+        <tr ${index === history.length - 1 ? 'style="background:#eaf4ff;font-weight:600;"' : ""}>
+          <td>${index + 1}</td>
+          <td>${run.requirement}</td>
+          <td>${run.validation}</td>
+          <td>${run.execution}</td>
+          <td>${run.timestamp}</td>
+        </tr>
+      `).join("");
+
+      document.getElementById("historyTable").innerHTML = rows;
+    })
+    .catch(err => {
+      console.error("Failed to load execution data:", err);
+    });
+</script>
+
+</body>
+</html>
