@@ -1,65 +1,32 @@
-LLM-Assisted BDD Functional Testing
-📖 Overview
-This project demonstrates a simple and practical approach to functional testing using LLM-assisted Behavior Driven Development (BDD).
+# LLM-Assisted BDD Functional Testing
 
-The system converts plain English business requirements into Gherkin scenarios. These scenarios are then validated, manually approved by a human tester, and selectively automated.
+## Overview
+This project demonstrates a simple and practical approach to functional testing using **LLM-assisted Behavior Driven Development (BDD)**.
 
-Core Philosophy: Only "happy-path" scenarios are automated to ensure reliability, stability, and control.
+Plain English business requirements are converted into Gherkin scenarios, validated, manually approved, and selectively automated.
 
-🔄 Project Flow
-The data pipeline moves through the following stages:
+> **Note:** Only happy-path scenarios are automated to ensure reliability and control.
 
-Business Requirement (Input)
+---
 
-BDD Scenario Generation (LLM)
+## Project Flow
+Business Requirement &rarr; BDD Scenario Generation &rarr; Validation &rarr; Manual Approval &rarr; BDD Automation &rarr; Dashboard Visualization
 
-Validation
+---
 
-Manual Approval (Human-in-the-loop)
+## Tech Stack
+* **Language:** Python
+* **Framework:** Behave (BDD)
+* **Automation:** Playwright
+* **Frontend:** HTML, CSS, JavaScript
+* **Reporting:** JSON
 
-BDD Automation (Execution)
+---
 
-Dashboard Visualization (Reporting)
+## How to Run
 
-🛠 Tech Stack
-Language: Python
-
-Framework: Behave (BDD)
-
-Automation: Playwright
-
-Frontend (Dashboard): HTML, CSS, JavaScript
-
-Data Exchange: JSON
-
-🚀 How to Run
-1. Prerequisites
-Ensure you have the necessary dependencies installed (assuming a requirements.txt exists):
-
-Bash
-
+### 1. Prerequisites
+Ensure you have the required libraries installed:
+```bash
 pip install -r requirements.txt
 playwright install
-2. Execute the Script
-Run the main entry point:
-
-Bash
-
-python run.py
-3. View Results
-After execution is complete, open the dashboard in your browser:
-
-Plaintext
-
-sample_app/dashboard.html
-📋 Scope & Test Coverage
-This project uses a Human-in-the-Loop approach to ensure accuracy.
-
-Admin Login: Represents the Automated Happy Path. This flow is fully generated and executed by the script.
-
-User Login: Documented and generated, but not automated. This demonstrates the selective nature of the automation.
-
-Approval: Final validation is performed by a human tester before execution triggers.
-
-👤 Author
-Nayan Kumar Biradar
