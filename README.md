@@ -30,3 +30,17 @@ Ensure you have the required libraries installed:
 ```bash
 pip install -r requirements.txt
 playwright install
+
+## Execute Script
+python run.py
+
+## View Report
+After execution, open the dashboard in your browser:
+sample_app/dashboard.html
+
+## Scope & Notes
+Admin Login: Represents the automated happy path.
+
+User Login: Documented but not automated.
+
+Human-in-the-Loop: Approval is strictly done by a tester before execution.
